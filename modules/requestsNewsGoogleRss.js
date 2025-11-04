@@ -6,7 +6,7 @@ const {
   WebsiteDomain,
   NewsApiRequestWebsiteDomainContract,
   ArticleContent,
-} = require("newsnexus07db");
+} = require("newsnexusdb09");
 const {
   writeResponseDataFromNewsAggregator,
 } = require("./utilitiesReadAndMakeFiles");

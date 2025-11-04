@@ -1,5 +1,5 @@
 {
-  "name": "newsnexusrequestergooglerss02",
+  "name": "newsnexusrequestergooglerss03",
   "version": "1.0.0",
   "description": "## Overview",
   "main": "index.js",
@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "newsnexus07db": "file:../NewsNexus07Db",
+    "newsnexusdb09": "file:../NewsNexusDb09",
     "xlsx": "^0.18.5",
     "xml2js": "^0.6.2"
   }

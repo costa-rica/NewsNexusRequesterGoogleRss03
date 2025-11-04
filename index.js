@@ -1,5 +1,5 @@
 require("dotenv").config();
-console.log("Starting NewsNexusRequesterGoogleRss02");
+console.log("Starting NewsNexusRequesterGoogleRss03");
 const {
   getRequestsParameterArrayFromExcelFile,
 } = require("./modules/utilitiesReadAndMakeFiles");
@@ -14,7 +14,7 @@ console.log(
   `--------------------------------------------------------------------------------`
 );
 console.log(
-  `- Start NewsNexusRequesterGoogleRss02 ${new Date().toISOString()} --`
+  `- Start NewsNexusRequesterGoogleRss03 ${new Date().toISOString()} --`
 );
 console.log(
   `MILISECONDS_IN_BETWEEN_REQUESTS: ${process.env.MILISECONDS_IN_BETWEEN_REQUESTS}`

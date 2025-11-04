@@ -1,7 +1,7 @@
 const {
   NewsApiRequest,
   NewsArticleAggregatorSource,
-} = require("newsnexus07db");
+} = require("newsnexusdb09");
 const { exec } = require("child_process");
 
 async function createArraysOfParametersNeverRequestedAndRequested(
@@ -152,13 +152,13 @@ async function runSemanticScorer() {
   })
     .then(() => {
       console.log(
-        " [NewsNexusRequesterGoogleRss02] ✅ NewsNexusSemanticScorer02 has finished."
+        " [NewsNexusRequesterGoogleRss03] ✅ NewsNexusSemanticScorer02 has finished."
       );
       process.exit();
     })
     .catch(() => {
       console.log(
-        " [NewsNexusRequesterGoogleRss02] ❌ NewsNexusSemanticScorer02 has finished with error."
+        " [NewsNexusRequesterGoogleRss03] ❌ NewsNexusSemanticScorer02 has finished with error."
       );
       process.exit(1);
     });
