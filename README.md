@@ -32,11 +32,31 @@ This app requires importing or adding the `newsnexusdb09` package, which provide
 
 ## Environment Variables
 
+- workstation
+
 ```
 APP_NAME=NewsNexusRequesterGoogleRss03
 NAME_DB=newsnexus09.db
 PATH_DATABASE=/Users/nick/Documents/_databases/NewsNexus09/
 PATH_TO_API_RESPONSE_JSON_FILES=/Users/nick/Documents/_project_resources/NewsNexus09/api_response_json_files
+PATH_AND_FILENAME_FOR_QUERY_SPREADSHEET_AUTOMATED=/Users/nick/Documents/_project_resources/NewsNexus09/utilities/automation_excel_files/AutomatedRequestsGoogleNewsRss.xlsx
+PATH_AND_FILENAME_TO_SEMANTIC_SCORER=/Users/nick/Documents/NewsNexusSemanticScorer02/index.js
+PATH_TO_SEMANTIC_SCORER_DIR=/Users/nick/Documents/_project_resources/NewsNexus09/utilities/semantic_scorer
+PATH_TO_SEMANTIC_SCORER_KEYWORDS_EXCEL_FILE=/Users/nick/Documents/_project_resources/NewsNexus09/utilities/semantic_scorer/NewsNexusSemanticScorerKeywords.xlsx
+NAME_OF_ORG_REQUESTING_FROM="Google News RSS"
+ACTIVATE_API_REQUESTS_TO_OUTSIDE_SOURCES=true
+LIMIT_DAYS_BACK_TO_REQUEST=29
+LIMIT_MAXIMUM_MASTER_INDEX=100
+MILISECONDS_IN_BETWEEN_REQUESTS=1100
+```
+
+- server
+
+```
+APP_NAME=NewsNexusRequesterGoogleRss03
+NAME_DB=newsnexus09.db
+PATH_DATABASE=/home/shared/databases/NewsNexus09/
+PATH_TO_API_RESPONSE_JSON_FILES=/home/shared/project_resources/NewsNexus09/api_response_json_files
 PATH_AND_FILENAME_FOR_QUERY_SPREADSHEET_AUTOMATED=/home/shared/project_resources/NewsNexus09/utilities/automation_excel_files/AutomatedRequestsGoogleNewsRss.xlsx
 PATH_AND_FILENAME_TO_SEMANTIC_SCORER=/home/shared/applications/NewsNexusSemanticScorer02/index.js
 PATH_TO_SEMANTIC_SCORER_DIR=/home/shared/project_resources/NewsNexus09/utilities/semantic_scorer
