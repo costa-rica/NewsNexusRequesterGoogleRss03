@@ -5,6 +5,7 @@
 The Google News RSS requester process is broken into two main parts:
 
 - base url: https://news.google.com/rss/
+- This NewsNexusRequesterGoogleNewsRss03 is different from NewsNexusRequesterGoogleNewsRss02 in that it uses the NewsNexusDb09 database.
 
 ### 1. Creating Prioritized Request Parameter Array
 

@@ -1,5 +1,11 @@
 require("dotenv").config();
 console.log("Starting NewsNexusRequesterGoogleRss03");
+
+// Initialize database models before using them
+const { initModels } = require("newsnexusdb09");
+initModels();
+console.log("Database models initialized");
+
 const {
   getRequestsParameterArrayFromExcelFile,
 } = require("./modules/utilitiesReadAndMakeFiles");
