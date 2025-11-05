@@ -37,7 +37,7 @@ async function requester(currentParams, indexMaster) {
 
   const newsArticleAggregatorSourceObj =
     await NewsArticleAggregatorSource.findOne({
-      where: { nameOfOrg: process.env.NAME_OF_ORG_REQUESTING_FROM },
+      where: { nameOfOrg: process.env.NAME_APP },
       raw: true, // Returns data without all the database gibberish
     });
 
@@ -71,10 +71,7 @@ async function requester(currentParams, indexMaster) {
       indexMaster
     ));
   } catch (error) {
-    console.error(
-      `Error during ${process.env.NAME_OF_ORG_REQUESTING_FROM} API request:`,
-      error
-    );
+    console.error(`Error during ${process.env.NAME_APP} API request:`, error);
     return; // prevent proceeding to storeGNewsArticles if request failed
   }
 
@@ -85,7 +82,7 @@ async function requester(currentParams, indexMaster) {
   // Step 4: store the articles
   if (!requestResponseData?.results) {
     console.log(
-      `No articles received from ${process.env.NAME_OF_ORG_REQUESTING_FROM} request response`
+      `No articles received from ${process.env.NAME_APP} request response`
     );
   } else {
     // Store articles and update NewsApiRequest
@@ -201,7 +198,7 @@ async function makeGoogleRssRequest(
         requestResponseData.results?.message?.includes("Rate limit exceeded")
       ) {
         console.log(
-          `--> ⛔ Ending process: rate limited by ${process.env.NAME_OF_ORG_REQUESTING_FROM}`
+          `--> ⛔ Ending process: rate limited by ${process.env.NAME_APP}`
         );
         await runSemanticScorer();
         // process.exit(1);
@@ -234,7 +231,7 @@ async function storeNewsApiArticles(requestResponseData, newsApiRequest) {
 
   // leverages the hasOne association from the NewsArticleAggregatorSource model
   const newsApiSource = await NewsArticleAggregatorSource.findOne({
-    where: { nameOfOrg: process.env.NAME_OF_ORG_REQUESTING_FROM },
+    where: { nameOfOrg: process.env.NAME_APP },
     include: [{ model: EntityWhoFoundArticle }],
   });
 

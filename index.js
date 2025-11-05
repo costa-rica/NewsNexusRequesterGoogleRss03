@@ -126,7 +126,7 @@ async function main() {
       dateEndOfRequest === new Date().toISOString().split("T")[0]
     ) {
       console.log(
-        `--- [End process] All ${process.env.NAME_OF_ORG_REQUESTING_FROM} queries updated ---`
+        `--- [End process] All ${process.env.NAME_APP} queries updated ---`
       );
       break;
     }

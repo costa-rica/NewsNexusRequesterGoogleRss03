@@ -71,7 +71,7 @@ The application depends on the `newsnexusdb09` package (local file dependency fr
 - **NewsApiRequest**: Tracks all API requests with query parameters and date ranges
 - **Article**: Stores article metadata (title, description, URL, publication date)
 - **ArticleContent**: Stores full article text content
-- **NewsArticleAggregatorSource**: Configuration for news sources (identified by `NAME_OF_ORG_REQUESTING_FROM`)
+- **NewsArticleAggregatorSource**: Configuration for news sources (identified by `NAME_APP`)
 - **EntityWhoFoundArticle**: Tracks which source/user discovered each article
 
 See `docs/DATABASE_OVERVIEW.md` for complete schema documentation.
@@ -143,7 +143,7 @@ All configuration via `.env` file:
 
 **News Source Configuration:**
 
-- `NAME_OF_ORG_REQUESTING_FROM`: Must match `nameOfOrg` in `NewsArticleAggregatorSource` table (e.g., "Google News RSS")
+- `NAME_APP`: Must match `nameOfOrg` in `NewsArticleAggregatorSource` table (e.g., "Google News RSS" or "NewsNexusRequesterGoogleRss03")
 
 **Request Control:**
 

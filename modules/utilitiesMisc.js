@@ -11,7 +11,7 @@ async function createArraysOfParametersNeverRequestedAndRequested(
   let arrayOfParametersRequested = [];
   const newsArticleAggregatorSourceObj =
     await NewsArticleAggregatorSource.findOne({
-      where: { nameOfOrg: process.env.NAME_OF_ORG_REQUESTING_FROM },
+      where: { nameOfOrg: process.env.NAME_APP },
       raw: true, // Returns data without all the database gibberish
     });
   // Load all existing requests from DB (we only need these 3 fields)
@@ -103,7 +103,7 @@ async function checkRequestAndModifyDates(
 async function findEndDateToQueryParameters(queryParameters) {
   const newsArticleAggregatorSourceObj =
     await NewsArticleAggregatorSource.findOne({
-      where: { nameOfOrg: process.env.NAME_OF_ORG_REQUESTING_FROM },
+      where: { nameOfOrg: process.env.NAME_APP },
       raw: true, // Returns data without all the database gibberish
     });
   const existingRequests = await NewsApiRequest.findAll({
