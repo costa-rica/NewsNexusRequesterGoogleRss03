@@ -17,6 +17,7 @@ node server.js         # Run with time window enforcement (22:55-23:10 UTC)
 ```
 
 ### Notes on Execution
+
 - `server.js` enforces a daily execution window (22:55-23:10 UTC) for automated runs
 - `index.js` is the main application entry point without time restrictions
 - The application uses `newsnexusdb09` package for database access (local file dependency)
@@ -26,12 +27,14 @@ node server.js         # Run with time window enforcement (22:55-23:10 UTC)
 ### Core Application Flow
 
 1. **Initialization** (index.js):
+
    - Load query parameters from Excel spreadsheet
    - Query database to separate never-requested vs previously-requested parameters
    - Sort previously-requested parameters by `dateEndOfRequest` (ascending)
    - Combine into prioritized array: [never-requested, ...oldest-requested-first]
 
 2. **Request Processing Loop**:
+
    - For each parameter set, calculate `dateEndOfRequest` from database history
    - Verify request is needed (dateEndOfRequest is not today)
    - Make Google News RSS request
@@ -45,11 +48,13 @@ node server.js         # Run with time window enforcement (22:55-23:10 UTC)
 ### Module Organization
 
 - **modules/requestsNewsGoogleRss.js**: Google RSS API requests and article storage
+
   - `requester()`: Main orchestrator for single request lifecycle
   - `makeGoogleRssRequest()`: Constructs URL, fetches RSS, parses XML
   - `storeNewsApiArticles()`: Saves articles to database (deduplicates by URL)
 
 - **modules/utilitiesReadAndMakeFiles.js**: File I/O operations
+
   - `getRequestsParameterArrayFromExcelFile()`: Parses Excel spreadsheet to query objects
   - `writeResponseDataFromNewsAggregator()`: Logs API responses to dated directories
 
@@ -74,13 +79,15 @@ See `docs/DATABASE_OVERVIEW.md` for complete schema documentation.
 ### Google News RSS Query Construction
 
 Queries are built from three parameter types (`andString`, `orString`, `notString`):
-- AND terms: Space-separated, joined with ` AND `
-- OR terms: Space-separated, wrapped in parentheses, joined with ` OR `
+
+- AND terms: Space-separated, joined with `AND`
+- OR terms: Space-separated, wrapped in parentheses, joined with `OR`
 - NOT terms: Space-separated, prefixed with `-` (minus sign)
 - Final query: `[AND] [OR] [NOT]` joined by spaces
 - Always includes: `language=en` and `country=us` parameters
 
 Example: If `andString="recall"`, `orString="injury death"`, `notString="politics"`:
+
 ```
 q=recall AND (injury OR death) -politics&language=en&country=us
 ```
@@ -98,6 +105,7 @@ The application ensures comprehensive coverage while avoiding redundant requests
 ### Date Range Management
 
 The application implements intelligent date windowing:
+
 - New queries start from 180 days ago
 - Subsequent requests continue from last `dateEndOfRequest`
 - Request window is 10 days (configurable via `requestWindowInDays`)
@@ -117,13 +125,16 @@ The application implements intelligent date windowing:
 All configuration via `.env` file:
 
 **Application Identity:**
-- `APP_NAME`: Application name for logging
+
+- `NAME_APP`: Application name for logging
 
 **Database Configuration:**
+
 - `PATH_DATABASE`: Directory containing SQLite database
 - `NAME_DB`: Database filename
 
 **File Paths:**
+
 - `PATH_TO_API_RESPONSE_JSON_FILES`: Directory for API response logs
 - `PATH_AND_FILENAME_FOR_QUERY_SPREADSHEET_AUTOMATED`: Excel file with query parameters
 - `PATH_AND_FILENAME_TO_SEMANTIC_SCORER`: Path to semantic scorer script
@@ -131,9 +142,11 @@ All configuration via `.env` file:
 - `PATH_TO_SEMANTIC_SCORER_KEYWORDS_EXCEL_FILE`: Keywords file for semantic analysis
 
 **News Source Configuration:**
+
 - `NAME_OF_ORG_REQUESTING_FROM`: Must match `nameOfOrg` in `NewsArticleAggregatorSource` table (e.g., "Google News RSS")
 
 **Request Control:**
+
 - `ACTIVATE_API_REQUESTS_TO_OUTSIDE_SOURCES`: Set to "true" to enable actual API requests
 - `LIMIT_DAYS_BACK_TO_REQUEST`: Days back to request (currently unused in favor of database-driven approach)
 - `LIMIT_MAXIMUM_MASTER_INDEX`: Maximum number of requests per run
@@ -142,6 +155,7 @@ All configuration via `.env` file:
 ## Excel Spreadsheet Format
 
 Required columns in `PATH_AND_FILENAME_FOR_QUERY_SPREADSHEET_AUTOMATED`:
+
 - `id`: Unique identifier for query row
 - `andString`: Space-separated AND terms (supports quoted phrases)
 - `orString`: Space-separated OR terms (supports quoted phrases)
@@ -149,6 +163,7 @@ Required columns in `PATH_AND_FILENAME_FOR_QUERY_SPREADSHEET_AUTOMATED`:
 - `startDate`: Initial start date for first request (Excel date format)
 
 Notes:
+
 - No `includeDomains` or `excludeDomains` columns needed (removed in current version)
 - Date parsing handles Excel serial date format
 - Empty strings allowed for any query parameter field

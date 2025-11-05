@@ -41,46 +41,6 @@ async function requester(currentParams, indexMaster) {
       raw: true, // Returns data without all the database gibberish
     });
 
-  // // Step 2: Check include and exclude domain string and convert to object arrays
-  // const includeDomainsArray = includeDomainsArrayString
-  //   .split(",")
-  //   .map((domain) => domain.trim());
-  // const excludeDomainsArray = excludeDomainsArrayString
-  //   .split(",")
-  //   .map((domain) => domain.trim());
-  // let excludeDomainsObjArray = [];
-  // let includeDomainsObjArray = [];
-
-  // console.log(
-  //   `includeDomainsArray [requester] (${includeDomainsArray.length}): ${includeDomainsArray}`
-  // );
-  // console.log(
-  //   `excludeDomainsArray [requester] (${excludeDomainsArray.length}): ${excludeDomainsArray}`
-  // );
-
-  // if (includeDomainsArray.length > 0) {
-  //   for (const domain of includeDomainsArray) {
-  //     const domainObj = await WebsiteDomain.findOne({
-  //       where: { name: domain },
-  //       raw: true,
-  //     });
-  //     if (domainObj) {
-  //       includeDomainsObjArray.push(domainObj);
-  //     }
-  //   }
-  // }
-  // if (excludeDomainsArray.length > 0) {
-  //   for (const domain of excludeDomainsArray) {
-  //     const domainObj = await WebsiteDomain.findOne({
-  //       where: { name: domain },
-  //       raw: true,
-  //     });
-  //     if (domainObj) {
-  //       excludeDomainsObjArray.push(domainObj);
-  //     }
-  //   }
-  // }
-
   // Step 2: Modify the startDate and endDate if necessary
   const { adjustedStartDate, adjustedEndDate } =
     await checkRequestAndModifyDates(
@@ -247,14 +207,6 @@ async function makeGoogleRssRequest(
         // process.exit(1);
       }
     }
-    // newsApiRequestObj = {
-    //   url: requestUrl,
-    //   andString: keywordsAnd,
-    //   orString: keywordsOr,
-    //   notString: keywordsNot,
-    //   status: requestResponseData.status,
-    //   countOfArticlesReceivedFromRequest: requestResponseData.results.length,
-    // };
 
     // Step 4: create new NewsApiRequest
     newsApiRequestObj = await NewsApiRequest.create({
@@ -345,74 +297,6 @@ async function storeNewsApiArticles(requestResponseData, newsApiRequest) {
     );
   }
 }
-
-// async function handleErrorNewsDataIoRequest(requestResponseData) {
-//   if (
-//     Array.isArray(requestResponseData.results?.message) &&
-//     typeof requestResponseData.results.message[0]?.message === "string" &&
-//     requestResponseData.results.message[0].message.includes(
-//       "The domain you provided does not exist"
-//     )
-//   ) {
-//     console.log(
-//       "- [makeNewsDataIoRequest] invalid domain: ",
-//       requestResponseData.results?.message?.[0]?.invalid_domain
-//     );
-//     await WebsiteDomain.update(
-//       {
-//         isArchievedNewsDataIo: true,
-//       },
-//       {
-//         where: {
-//           name: requestResponseData.results.message[0].invalid_domain,
-//         },
-//       }
-//     );
-//   } else {
-//     console.log("Correctly handled invalid_domain with no message 🤩");
-//   }
-
-//   if (requestResponseData.results.message[0]?.suggestion) {
-//     console.log(
-//       "- [makeNewsDataIoRequest] suggestion: ",
-//       requestResponseData.results.message[0].suggestion
-//     );
-//     for (const msg of requestResponseData.results.message) {
-//       const invalidDomain = msg.invalid_domain;
-//       const suggestions = msg.suggestion;
-
-//       if (invalidDomain) {
-//         console.log(
-//           "- [makeNewsDataIoRequest] Archiving invalid domain:",
-//           invalidDomain
-//         );
-//         await WebsiteDomain.update(
-//           { isArchievedNewsDataIo: true },
-//           { where: { name: invalidDomain } }
-//         );
-//       }
-
-//       if (Array.isArray(suggestions)) {
-//         for (const suggestion of suggestions) {
-//           try {
-//             const websiteDomain = await WebsiteDomain.create({
-//               name: suggestion,
-//             });
-//             console.log(
-//               "- [makeNewsDataIoRequest] Added suggestion:",
-//               websiteDomain.name
-//             );
-//           } catch (err) {
-//             console.warn(
-//               `⚠️ Failed to add suggestion ${suggestion}:`,
-//               err.message
-//             );
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
 
 module.exports = {
   requester,

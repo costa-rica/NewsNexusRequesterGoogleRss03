@@ -35,7 +35,7 @@ This app requires importing or adding the `newsnexusdb09` package, which provide
 - workstation
 
 ```
-APP_NAME=NewsNexusRequesterGoogleRss03
+NAME_APP=NewsNexusRequesterGoogleRss03
 NAME_DB=newsnexus09.db
 PATH_DATABASE=/Users/nick/Documents/_databases/NewsNexus09/
 PATH_TO_API_RESPONSE_JSON_FILES=/Users/nick/Documents/_project_resources/NewsNexus09/api_response_json_files
@@ -53,7 +53,7 @@ MILISECONDS_IN_BETWEEN_REQUESTS=1100
 - server
 
 ```
-APP_NAME=NewsNexusRequesterGoogleRss03
+NAME_APP=NewsNexusRequesterGoogleRss03
 NAME_DB=newsnexus09.db
 PATH_DATABASE=/home/shared/databases/NewsNexus09/
 PATH_TO_API_RESPONSE_JSON_FILES=/home/shared/project_resources/NewsNexus09/api_response_json_files
